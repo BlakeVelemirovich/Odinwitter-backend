@@ -7,14 +7,14 @@ const message_controller = require('./controllers/message_controller');
 const user_controller = require('./controllers/user_controller');
 
 // database connection setup using a secret key
-/*const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 const mongoDB = process.env.MONGODB_CONNECTION_URL;
 
 main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(mongoDB);
-}*/
+}
 
 app.use(express.json());
 app.use(cors());
@@ -22,7 +22,11 @@ app.use(cors());
 // route for when a user submits a new post
 app.post('/api/strike', message_controller.new_message);
 
+// signup
 app.post('/api/signup', user_controller.signup);
+
+// login
+app.post('/api/login', user_controller.login)
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
